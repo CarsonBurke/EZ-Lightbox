@@ -1,0 +1,58 @@
+body {
+    background: rgb(240, 240, 240);
+    padding: 0;
+    margin: 0;
+    transition: all 0.2s;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(224, 224, 224);
+    box-shadow: rgba(0, 0, 0, 0.04) 0 12px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://images.unsplash.com/photo-1532354058425-ba7ccc7e4a24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VicGFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+}
+
+.objectMiddle {
+    width: 350px;
+    height: 350px;
+    background-color: rgb(70, 70, 70);
+    box-shadow: rgba(0, 0, 0, 0.2) 0 12px 30px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.containerTopper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 100;
+}
+
+.containerHeader {
+    color: rgb(53, 134, 255);
+    text-transform: uppercase;
+    font-size: 42px;
+}
+
+.containerContent {
+    color: white;
+}
+
+.content {
+    height: 100vh;
+    z-index: 100;
+    position: relative;
+    background: rgb(240, 240, 240);
+}
