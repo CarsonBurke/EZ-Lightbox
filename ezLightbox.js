@@ -2,14 +2,53 @@ addStyles()
 
 function addStyles() {
     let styles = `
+
+    @keyframes floatIn {
+        0% {
+
+            top: 150px;
+            opacity: 0;
+        }
+        50% {
+
+            opacity: 0;
+        }
+        100% { 
+
+            opacity: 1;
+            top: 0;
+        }
+    }
+
     .lightboxContainer {
         z-index: 1000;
-        box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 10000px !important;
-        transition: box-shadow 0;
+        transition: all 0.3s;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.55);
+        cursor: pointer;
     }
     .lightboxImage {
+        max-height: 80vh;
+        max-width: 80vw;
+        object-fit: cover;
+        cursor: grab;
+        user-select: none;
+        position: relative;
+        transition: all 0.3s;
+        animation: floatIn 0.4s;
+        aspect-ratio: 1/1;
+    }
+    .lightboxContainerHide {
 
-        
+        opacity: 0;
+        pointer-events: none;
     }
     `
 
@@ -20,6 +59,8 @@ function addStyles() {
 
 let lightElements = document.getElementsByClassName("ezLightbox")
 
+// Add styles to improve UX with lightbox
+
 window.onload = function() {
 
     for (let element of lightElements) {
@@ -28,30 +69,52 @@ window.onload = function() {
     }
 }
 
-window.onclick = function(target) {
+window.onclick = function(click) {
 
-    let element = target.target
-
-    console.log(target)
+    let element = click.target
 
     if (element.classList.contains("ezLightbox")) {
 
-        //element.style.border = "solid 5px black"
+        if (!element.dataset.sizeMultiplier) {
 
-        element.classList.add("lightboxActive")
-
-        /*
-        let lightbox = document.createElement("div")
-
-        lightbox.classList.add("lightboxActive")
-
-        document.body.appendChild(lightbox)
-        */
-    } else {
-
-        for (let element of lightElements) {
-
-            element.classList.remove("lightboxActive")
+            element.dataset.sizeMultiplier = 1
         }
+
+        // Container
+
+        let lightboxContainer = document.createElement("div")
+
+        lightboxContainer.classList.add("lightboxContainer")
+
+        document.body.appendChild(lightboxContainer)
+
+        // Image
+
+        let lightboxImage = document.createElement("img")
+
+        lightboxImage.src = element.src
+
+        lightboxImage.style.width = element.offsetWidth * element.dataset.sizeMultiplier + "px"
+
+        lightboxImage.style.height = element.offsetHeight * element.dataset.sizeMultiplier + "px"
+
+        lightboxImage.classList.add("lightboxImage")
+
+        lightboxContainer.appendChild(lightboxImage)
+
+        document.body.style.overflow = "hidden"
+
+    } else if (!element.classList.contains("lightboxImage")) {
+
+        // Hide lightbox when user clicks off
+
+        let lightboxContainers = document.getElementsByClassName("lightboxContainer")
+
+        for (let element of lightboxContainers) {
+
+            element.classList.add("lightboxContainerHide")
+        }
+
+        document.body.style.overflow = "initial"
     }
 }
