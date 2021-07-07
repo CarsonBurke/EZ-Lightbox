@@ -31,7 +31,7 @@ function addStyles() {
         top: 0;
         bottom: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.55);
+        background: rgba(0, 0, 0, 0.75);
         cursor: pointer;
     }
     .lightboxImage {
@@ -77,7 +77,7 @@ window.onclick = function(click) {
 
         if (!element.dataset.sizeMultiplier) {
 
-            element.dataset.sizeMultiplier = 1
+            element.dataset.sizeMultiplier = 1.5
         }
 
         // Container
