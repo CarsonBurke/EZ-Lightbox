@@ -116,7 +116,16 @@ window.onload = function() {
     }
 }
 
+window.ontouchstart = function(click) {
+
+    userInteract(click)
+}
 window.onclick = function(click) {
+
+    userInteract(click)
+}
+
+function userInteract(click) {
 
     let element = click.target
 
@@ -196,9 +205,12 @@ window.onkeydown = function(interaction) {
     }
 }
 
-
 // Hide lightbox when user scrolls
 
+window.onscroll = function() {
+
+    closeLightbox()
+}
 window.onwheel = function() {
 
     closeLightbox()
