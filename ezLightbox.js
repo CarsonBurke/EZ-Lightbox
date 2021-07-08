@@ -1,3 +1,5 @@
+// Add styles 
+
 addStyles()
 
 function addStyles() {
@@ -6,7 +8,7 @@ function addStyles() {
     @keyframes floatIn {
         0% {
 
-            top: 150px;
+            transform: translateY(150px);
             opacity: 0;
         }
         50% {
@@ -16,7 +18,7 @@ function addStyles() {
         100% { 
 
             opacity: 1;
-            top: 0;
+            transform: translateY(0);
         }
     }
 
@@ -31,7 +33,6 @@ function addStyles() {
         top: 0;
         bottom: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.75);
         cursor: pointer;
     }
     .lightboxImage {
@@ -40,7 +41,6 @@ function addStyles() {
         object-fit: cover;
         cursor: grab;
         user-select: none;
-        position: relative;
         transition: all 0.3s;
         animation: floatIn 0.4s;
         aspect-ratio: 1/1;
@@ -75,14 +75,28 @@ window.onclick = function(click) {
 
     if (element.classList.contains("ezLightbox")) {
 
+        // Add default values
+
+        if (!element.dataset.backgroundOpacity) {
+
+            element.dataset.backgroundOpacity = 0.85
+        }
+
         if (!element.dataset.sizeMultiplier) {
 
             element.dataset.sizeMultiplier = 1.5
         }
 
+        if (!element.dataset.aspectRatio) {
+
+            element.dataset.aspectRatio = 1 / 1
+        }
+
         // Container
 
         let lightboxContainer = document.createElement("div")
+
+        lightboxContainer.style.background = "rgba(0, 0, 0, " + element.dataset.backgroundOpacity + ")"
 
         lightboxContainer.classList.add("lightboxContainer")
 
@@ -96,7 +110,7 @@ window.onclick = function(click) {
 
         lightboxImage.style.width = element.offsetWidth * element.dataset.sizeMultiplier + "px"
 
-        lightboxImage.style.height = element.offsetHeight * element.dataset.sizeMultiplier + "px"
+        lightboxImage.style.aspectRatio = element.dataset.aspectRatio
 
         lightboxImage.classList.add("lightboxImage")
 
