@@ -23,6 +23,7 @@ function addStyles() {
     }
 
     .lightboxContainer {
+
         z-index: 1000;
         transition: all 0.3s;
         position: fixed;
@@ -33,9 +34,18 @@ function addStyles() {
         top: 0;
         bottom: 0;
         right: 0;
-        cursor: pointer;
+    }
+    .lightboxContainerHide {
+
+        opacity: 0;
+        pointer-events: none;
+    }
+    .lightboxContainerHide .lightboxImage {
+
+        transform: translateY(-150px);
     }
     .lightboxImage {
+
         max-height: 80vh;
         max-width: 80vw;
         object-fit: cover;
@@ -45,7 +55,26 @@ function addStyles() {
         animation: floatIn 0.4s;
         aspect-ratio: 1/1;
     }
-    .lightboxContainerHide {
+    .closeButton {
+
+        z-index: 1001;
+        cursor: pointer;
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        border-radius: 100%;
+        font-size: 40px;
+        color: white;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        transition: all 0.3s;
+    }
+    .closeButton:hover {
+
+        opacity: 0.5;
+    }
+    .closeButtonHide {
 
         opacity: 0;
         pointer-events: none;
@@ -116,7 +145,15 @@ window.onclick = function(click) {
 
         lightboxContainer.appendChild(lightboxImage)
 
-        document.body.style.overflow = "hidden"
+        // Close button
+
+        let closeButton = document.createElement("img")
+
+        closeButton.src = "https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2018/png/iconmonstr-x-mark-thin.png&r=255&g=255&b=255"
+
+        closeButton.classList.add("closeButton")
+
+        document.body.appendChild(closeButton)
 
     } else if (!element.classList.contains("lightboxImage")) {
 
@@ -129,6 +166,28 @@ window.onclick = function(click) {
             element.classList.add("lightboxContainerHide")
         }
 
-        document.body.style.overflow = "initial"
+        let closeButtons = document.getElementsByClassName("closeButton")
+
+        for (let element of closeButtons) {
+
+            element.classList.add("closeButtonHide")
+        }
+    }
+}
+
+window.onscroll = function() {
+
+    let lightboxContainers = document.getElementsByClassName("lightboxContainer")
+
+    for (let element of lightboxContainers) {
+
+        element.classList.add("lightboxContainerHide")
+    }
+
+    let closeButtons = document.getElementsByClassName("closeButton")
+
+    for (let element of closeButtons) {
+
+        element.classList.add("closeButtonHide")
     }
 }
